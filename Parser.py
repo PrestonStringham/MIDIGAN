@@ -11,7 +11,6 @@ class Parser:
     
     path = ''
     files = []
-    
 
     def __init__(self, path):
                 self.path = path
@@ -22,9 +21,9 @@ class Parser:
     def parse(self):
         for file in self.files:
             messages = []
-            for message in mido.MidiFile(self.path + file).play():
+            for message in mido.MidiFile(self.path + file).tracks[0]:
                 messages.append(message)
-                    
+            print(messages)        
             #I only care about note_on and note_off
             cleansed = [x for x in messages if x.type == 'note_on' or x.type == 'note_off']
             messages = cleansed
@@ -33,6 +32,7 @@ class Parser:
             parsed = []
             parsed.append(['note_status', 'note', 'velocity', 'time'])
             for i in range(len(messages)):
+
                 parsed.append([messages[i].type, messages[i].note, messages[i].velocity, messages[i].time])
                 if parsed[i][0] == 'note_on':
                     parsed[i][0] = 1
