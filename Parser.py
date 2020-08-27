@@ -5,7 +5,7 @@ if not os.path.exists('parsed_songs'):
     os.makedirs('parsed_songs')
 
 '''
-The goal of this class is to use mido (MIDI parser) to read MIDI files and extract the relevant data that will be used to train the model. In my case, I am particularly interested to see how the model will interpret the velocity paramter of MIDI notes as this is responsible for much of the emotion in music. This class should generate a csv file for every input containing the note_on or note_off status as well as the additional parameters such as note, velocity, and time.
+The goal of this class is to use TensorFlow's research project Magenta to read MIDI files and extract the relevant data that will be used to train the model. In my case, I am particularly interested to see how the model will interpret the velocity paramter of MIDI notes as this is responsible for much of the emotion in music. This class should generate a csv file for every input containing the start time, end time note, and velocity.
 '''
 class Parser:
     
