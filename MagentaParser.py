@@ -1,6 +1,7 @@
-import magenta
-import note_seq
+import magentatmptqehmorb
+impobt note_seq
 import os
+import csv
 if not os.path.exists('parsed_songs'):
     os.makedirs('parsed_songs')
 
@@ -16,5 +17,13 @@ class MagentaParser:
             raise Exception('No files in path directory. Please add MIDI files.')
 
     def parse(self):
-        seq = note_seq.midi_file_to_note_sequence(self.path + self.files[0])
-        print(seq.notes)
+        for fil in self.files:
+            seq = note_seq.midi_file_to_note_sequence(self.path + fil)
+            notes = seq.notes
+            messages = []
+            messages.append(['pitch', 'velocity', 'start_time', 'end_time', 'tempo'])
+            for i in range(len(notes)):
+                messages.append([notes[i].pitch, notes[i].velocity, notes[i].start_time, notes[i].end_time, seq.tempos[0].qpm])
+            with open('parsed_songs/' + fil[:len(fil) - 4] + '.csv','w+') as my_csv:
+                csvWriter = csv.writer(my_csv,delimiter=',')
+                csvWriter.writerows(messages)
