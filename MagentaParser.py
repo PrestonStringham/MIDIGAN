@@ -1,5 +1,5 @@
-import magentatmptqehmorb
-impobt note_seq
+import magenta
+import note_seq
 import os
 import csv
 if not os.path.exists('parsed_songs'):
